@@ -28,11 +28,20 @@ const userSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    mobile: {
+    avatar: {
       type: String,
-      required: true,
-      unique: true,
     },
+    
+    role:{
+      type: String,
+      default: 'user',
+      enum: ['user', 'admin']
+
+    },
+    favourites:[{
+      type: mongoose.Types.ObjectId,
+      ref: "books"
+    }]
   },
   { timestamps: true }
 );
