@@ -1,5 +1,4 @@
-import books from "../models/Books";
-
+import books from "../models/Books.js";
 //Create a new Book
 
 export const createBook = async (req, res) => {
@@ -16,7 +15,7 @@ export const createBook = async (req, res) => {
 
 export const getBooks = async (req, res) => {
   try {
-    const books = await Book.find({});
+    const books = await books.find({});
     res.status(200).json(books);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -26,7 +25,7 @@ export const getBooks = async (req, res) => {
 // Get a single book by ID
 export const getBookById = async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id);
+    const book = await books.findById(req.params.id);
     if (!book) return res.status(404).json({ message: "Book not found" });
     res.status(200).json(book);
   } catch (error) {
@@ -37,7 +36,7 @@ export const getBookById = async (req, res) => {
 // Update a book
 export const updateBook = async (req, res) => {
   try {
-    const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
+    const book = await books.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     if (!book) return res.status(404).json({ message: "Book not found" });
@@ -50,7 +49,7 @@ export const updateBook = async (req, res) => {
 // Delete a book
 export const deleteBook = async (req, res) => {
   try {
-    const book = await Book.findByIdAndDelete(req.params.id);
+    const book = await books.findByIdAndDelete(req.params.id);
     if (!book) return res.status(404).json({ message: "Book not found" });
     res.status(200).json({ message: "Book deleted" });
   } catch (error) {
